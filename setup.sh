@@ -17,26 +17,26 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
     ###############################################################################
     # Computer Settings                                                           #
     ###############################################################################
-    echo -e "${RED}Enter your computer name please?${NC}"
-    read cpname
+#     echo -e "${RED}Enter your computer name please?${NC}"
+#     read cpname
     echo -e "${RED}Please enter your name?${NC}"
     read name
     echo -e "${RED}Please enter your git email?${NC}"
     read email
 
-    clear
+#     clear
 
-    sudo scutil --set ComputerName "$cpname"
-    sudo scutil --set HostName "$cpname"
-    sudo scutil --set LocalHostName "$cpname"
-    defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$cpname"
+#     sudo scutil --set ComputerName "$cpname"
+#     sudo scutil --set HostName "$cpname"
+#     sudo scutil --set LocalHostName "$cpname"
+#     defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$cpname"
 
-    defaults write -g ApplePressAndHoldEnabled -bool false
-    defaults write com.apple.finder ShowPathbar -bool true
-    defaults write com.apple.finder ShowStatusBar -bool true
-    defaults write NSGlobalDomain KeyRepeat -int 0.02
-    defaults write NSGlobalDomain InitialKeyRepeat -int 12
-    chflags nohidden ~/Library
+#     defaults write -g ApplePressAndHoldEnabled -bool false
+#     defaults write com.apple.finder ShowPathbar -bool true
+#     defaults write com.apple.finder ShowStatusBar -bool true
+#     defaults write NSGlobalDomain KeyRepeat -int 0.02
+#     defaults write NSGlobalDomain InitialKeyRepeat -int 12
+#     chflags nohidden ~/Library
 
 
     git config --global user.name "$name"
@@ -63,8 +63,10 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
       # Install Nodejs
       echo "Installing NVM"
       curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-
-      export NVM_DIR="/Users/adam/.nvm"
+      
+      echo -e "${RED}Please enter your nvm directory. (User directory)${NC}"
+      read nvmDir
+      export NVM_DIR="/Users/${nvmDir}/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm so we dont have to reboot the terminal
 
       #Installing Nodejs
@@ -177,40 +179,41 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
 
 
     clear
-    # Install Homebrew Apps
-    echo "Installing Homebrew Command Line Tools"
-    brew install \
-    tree \
-    wget \
-    ack \
-    heroku-toolbelt
+#     # Install Homebrew Apps
+#     echo "Installing Homebrew Command Line Tools"
+#     brew install \
+#     tree \
+#     wget \
+#     ack \
+#     heroku-toolbelt
 
-    # Install EMacs
-    echo "Installing EMacs"
-    brew install emacs --with-cocoa
-    brew linkapps emacs
+#     # Install EMacs
+#     echo "Installing EMacs"
+#     brew install emacs --with-cocoa
+#     brew linkapps emacs
 
-    brew tap caskroom/cask
+#     brew tap caskroom/cask
 
-    echo "Installing Apps"
-    brew cask install \
-    google-chrome \
-    coderunner \
-    gitter \
-    github-desktop \
-    atom \
-    gitkraken \
-    mamp \
-    macdown \
-    google-drive \
-    iterm2 \
-    sublime-text \
-    virtualbox \
-    scratch
+#     echo "Installing Apps"
+#     brew cask install \
+#     google-chrome \
+#     coderunner \
+#     gitter \
+#     github-desktop \
+#     atom \
+#     gitkraken \
+#     mamp \
+#     macdown \
+#     google-drive \
+#     iterm2 \
+#     sublime-text \
+#     virtualbox \
+#     scratch
 
-    echo "Cleaning Up Cask Files"
-    brew cask cleanup
+#     echo "Cleaning Up Cask Files"
+#     brew cask cleanup
 
+    # Install OhMyZsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     clear
